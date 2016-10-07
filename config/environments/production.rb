@@ -83,4 +83,23 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  
+  config.action_mailer.asset_host = "#{ENV['APP_DOMAIN']}:#{ENV['APP_PORT']}"
+  
+  config.active_support.deprecation = :stderr 
+  config.action_mailer.default_url_options = { :host => "#{ENV['APP_DOMAIN']}:#{ENV['APP_PORT']}" } 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default :charset => 'utf-8'
+  ActionMailer::Base.default from: "Bolettos.com"
+  ActionMailer::Base.smtp_settings = {
+    :enable_starttls_auto => false,
+    :openssl_verify_mode => 'none',    
+    :address => ENV['SMTP_ADDRESS'],
+    :port => ENV['SMTP_PORT'],
+    :domain => "#{ENV['APP_DOMAIN']}:#{ENV['APP_PORT']}",
+    :authentication => :login,
+    :user_name => ENV['EMAIL_ADDRESS'],
+    :password => ENV['EMAIL_PASSWORD']
+  }
+  
 end
