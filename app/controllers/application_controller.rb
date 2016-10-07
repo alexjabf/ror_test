@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
   protect_from_forgery with: :exception
-  before_filter :get_user_status
+  before_action :get_user_status
   def get_user_status
     if signed_in? and !current_user.active
       sign_out(current_user)
