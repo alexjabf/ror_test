@@ -252,6 +252,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   faker
+  haml
   haml-rails
   html2haml
   jbuilder (~> 2.5)

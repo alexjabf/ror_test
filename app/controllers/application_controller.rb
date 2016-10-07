@@ -9,32 +9,32 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  if Rails.env == "production" or Rails.env == "development"
-    rescue_from Exception do |exception|
-      manage_exception(exception, 1)
-    end
-    rescue_from ActiveRecord::RecordNotFound do |exception|
-      manage_exception(exception, 2)
-    end
-    rescue_from ActionController::RoutingError do |exception|
-      manage_exception(exception, 3)
-    end
-    rescue_from ActionController::ActionControllerError do |exception|
-      manage_exception(exception, 4)
-    end 
-    rescue_from AbstractController::DoubleRenderError do |exception|
-      manage_exception(exception, 5)
-    end
-  end
-
-  def manage_exception(exception, code)
-    line_number = exception.backtrace.to_s.split(":in").first.gsub("[\"", "")
-    if exception.to_s == 'You are not authorized to access this page.'
-      flash[:alert] =  "La página solicitada no existe."
-      redirect_to root_path
-    else
-      flash[:error] = Rails.env.development? ? "Something went wrong: " + exception.to_s + " in " + line_number : "Un error inesperado ha ocurrido (#{exception.to_s}). Por favor, contáctanos."
-      redirect_to root_path
-    end
-  end
+#  if Rails.env == "production" or Rails.env == "development"
+#    rescue_from Exception do |exception|
+#      manage_exception(exception, 1)
+#    end
+#    rescue_from ActiveRecord::RecordNotFound do |exception|
+#      manage_exception(exception, 2)
+#    end
+#    rescue_from ActionController::RoutingError do |exception|
+#      manage_exception(exception, 3)
+#    end
+#    rescue_from ActionController::ActionControllerError do |exception|
+#      manage_exception(exception, 4)
+#    end 
+#    rescue_from AbstractController::DoubleRenderError do |exception|
+#      manage_exception(exception, 5)
+#    end
+#  end
+#
+#  def manage_exception(exception, code)
+#    line_number = exception.backtrace.to_s.split(":in").first.gsub("[\"", "")
+#    if exception.to_s == 'You are not authorized to access this page.'
+#      flash[:alert] =  "La página solicitada no existe."
+#      redirect_to root_path
+#    else
+#      flash[:error] = Rails.env.development? ? "Something went wrong: " + exception.to_s + " in " + line_number : "Un error inesperado ha ocurrido (#{exception.to_s}). Por favor, contáctanos."
+#      redirect_to root_path
+#    end
+#  end
 end

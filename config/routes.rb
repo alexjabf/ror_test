@@ -1,26 +1,8 @@
 Rails.application.routes.draw do
+  get 'welcome/index'
+
   resources :user_contacts
-  resources :payment_types do
-    collection do
-      delete 'destroy_multiple'
-    end
-  end
-  
-  get 'tickets/buy_tickets'
-  get 'tickets/my_tickets'
-  resources :tickets do
-    collection do
-      delete 'destroy_multiple'
-    end
-  end
-  
-  get 'events/all_events'  
-  get 'events/my_events'
-  resources :events do
-    collection do
-      delete 'destroy_multiple'
-    end
-  end
+
   resources :roles do
     collection do
       delete 'destroy_multiple'
