@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  protected: false
+  superadmin: false
+  administrator: false
+  default_user: false
+  guess: false
+  custom: false
+  description: MyText
+  code: MyString
+
+two:
+  name: MyString
+  protected: false
+  superadmin: false
+  administrator: false
+  default_user: false
+  guess: false
+  custom: false
+  description: MyText
+  code: MyString

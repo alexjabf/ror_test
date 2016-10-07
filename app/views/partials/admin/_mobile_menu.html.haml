@@ -1,0 +1,70 @@
+.mobile-nav-menu
+  .mobile-brand-icon
+    = link_to '#', class: 'mobile-menu-button', title: t('layouts.application.home') do
+      .logo
+        Bolettos
+        %span> .
+        com
+  - if signed_in?
+    .mobile-user-session-icon
+      = link_to current_user, title: t('layouts.partials.navbar.show_my_account') do
+        %i.fa.fa-user
+    .mobile-user-session
+      = link_to current_user, title: t('layouts.partials.navbar.show_my_account') do
+        = current_user.full_name
+  - else
+    .mobile-user-session-icon
+      = link_to new_session_path(resource_name), title: t('devise.links.sign_in') do
+        %i.fa.fa-sign-in
+    .mobile-user-session
+      = link_to new_session_path(resource_name), class: 'single-link', title: t('devise.links.sign_in') do
+        = t('devise.links.sign_in')
+.mobile-nav-content
+  %ul.list-unstyled
+    - if signed_in?
+      %li.sell_link
+        = link_to root_path, title: t('layouts.application.sell_tickets') do
+          %i.fa.fa-ticket.sell_icon
+          = t('layouts.application.sell_tickets')
+    - else
+      %li.sell_link
+        = link_to new_registration_path(resource_name), title: t('devise.links.sign_up') do
+          %i.fa.fa-ticket.sell_icon
+          = t('layouts.application.sell_tickets')
+    %li
+      = link_to root_path, title: t('layouts.application.home') do
+        %i.fa.fa-home
+        = t('layouts.application.home')
+    %li
+      = link_to root_path, title: t('layouts.application.sports') do
+        %i.fa.fa-soccer-ball-o
+        = t('layouts.application.sports')
+    %li
+      = link_to root_path, title: t('layouts.application.concerts') do
+        %i.fa.fa-microphone
+        = t('layouts.application.concerts')
+    %li
+      = link_to root_path, title: t('layouts.application.shows') do
+        %i.fa.fa-tv
+        = t('layouts.application.shows')
+    %li
+      = link_to root_path, title: t('layouts.application.how_it_works') do
+        %i.fa.fa-tag
+        = t('layouts.application.how_it_works')
+    %li
+      = link_to root_path, title: t('layouts.application.who_are_we') do
+        %i.fa.fa-info-circle
+        = t('layouts.application.who_are_we')
+    %li
+      = link_to root_path, title: t('layouts.application.contact') do
+        %i.fa.fa-comment
+        = t('layouts.application.contact')
+    %li
+      = link_to root_path, title: t('layouts.application.faqs') do
+        %i.fa.fa-question-circle
+        = t('layouts.application.faqs')
+    - if signed_in?
+      %li
+        = link_to destroy_session_path, title: t('layouts.partials.navbar.sign_out') do
+          %i.fa.fa-sign-out
+          = t('layouts.partials.navbar.sign_out')

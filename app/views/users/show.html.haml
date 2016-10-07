@@ -1,0 +1,39 @@
+/ Projects Row
+.row
+  .col-lg-12
+    %h1.page-header
+      Detalles de Usuario
+      %small Aquí puedes ver y editar tus datos o dar de baja tu cuenta
+    %ol.breadcrumb
+      %li
+        %a{:href => "/"} Inicio
+      %li.active Prueba
+.panel.panel-primary.col-lg-12
+  %p
+    %b Nombre:
+    = @user.first_name
+  %p
+    %b Apellido:
+    = @user.last_name
+  %p
+    %b Username:
+    = @user.username
+  %p
+    %b Email:
+    = @user.email
+  %p
+    %b Rol:
+    = @user.role.name if @user.role
+  %p
+    %b Activo:
+    = t(@user.active.to_s)
+  %p
+    %b Avatar:
+    = image_tag(@user.avatar)
+  - if can? :destroy, User  
+    %p
+      = link_to 'Editar mi cuenta', edit_user_registration_path, class: 'btn btn-primary'
+  - if can? :destroy, User  
+    %p
+      = button_to "Cancelar mi cuenta", registration_path(resource_name), data: { confirm: "Estas seguro que deseas cancelar tu cuenta?" }, method: :delete, class: 'btn btn-danger'
+     

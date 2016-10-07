@@ -1,0 +1,6 @@
+.event_avatar
+  %svg{viewbox:'0 0 100 100'}
+    %defs
+      %pattern#eventImage{height:'100', width:'100', patternUnits:'userSpaceOnUse'}
+        %image{height:'100', width:'150', x:'-15', 'xlink:href':"#{@avatar.url}"}
+    %polygon{fill:'url(#eventImage)', points:'50 1 99 25 99 75 50 99 1 75 1 25'}

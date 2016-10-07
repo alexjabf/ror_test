@@ -1,0 +1,49 @@
+es:
+  roles:
+    role_types:
+        not_role: 'Sin Rol'
+        superadmin: 'Super Administrador'
+        administrator: 'Administrador'
+        driver: 'Conductor: '
+        default_user: 'Usuario: '        
+        default_user: 'Usuario'
+        guess: 'Invitado' 
+        custom: 'Personalizado'    
+    show:
+      id: 'Id: '      
+      name: 'Nombre: '
+      role_type: 'Tipo de Rol: '      
+      description: 'Descripción: '
+      superadmin: 'Súper Administrador: '
+      default_user: 'Usuario: '
+      custom: 'Personalizado: '
+      code: 'Código: '
+      created_at: 'Registrado el: '
+      updated_at: 'Actualizado el: '
+    index:
+      id: 'Id ' 
+      name: 'Nombre'
+      role_type: 'Tipo de Rol '        
+      description: 'Descripción'
+      superadmin: 'Súper Administrador'
+      default_user: 'Usuario'      
+      custom: 'Personalizado'
+      code: 'Código: '   
+      created_at: 'Registrado el'
+      updated_at: 'Actualizado el'      
+  activerecord:
+    models:
+      role: 'Rol'
+      roles: 'Roles'
+    attributes:
+      role:
+        id: 'Id: '      
+        name: 'Nombre: '
+        role_type: 'Tipo de Rol: '          
+        description: 'Descripción: '
+        superadmin: 'Súper Administrador: '       
+        default_user: 'Usuario: ' 
+        custom: 'Personalizado: '
+        code: 'Código: '    
+        created_at: 'Registrado el: '
+        updated_at: 'Actualizado el: '

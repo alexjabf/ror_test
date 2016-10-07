@@ -1,0 +1,421 @@
+- if (controller_name == 'welcome' and action_name == 'index')
+  %section.m-block--top.home
+    .container
+      %nav
+        .logo
+          %a{:href => '/'}
+            %img{:src => '/assets/default/img/logo_azul.png'}
+        .nav-buttons-right
+          %a.button--empty{:href => '/tickets/sell_tickets'} Vende boletos
+          - unless signed_in?
+            %a.button--empty{:href => '#', title:t('devise.links.sign_in'), "data-toggle" => "modal", "data-target" => "#loginModal"} Entrar
+          -else
+            %span.hello Hola, #{current_user.first_name}
+          .menu-button
+            %i.fa.fa-bars#menuButton
+      .m-block--top__heading
+        %h1
+          %em> ¿
+          Te sobran o te faltan1?
+          %em{:style => 'margin-left: -7px;'} ?
+        %h2 ¡Vende y compra boletos para los mejores eventos!
+      .m-block--top__search
+        .search-overlay
+        = form_tag root_path, method: :get, class: 'm-form--search form-inline' do
+          .form-group.main--search
+            .input-group.main--search
+              .input-group-addon.main--search
+                %i.fa.fa-search
+              = autocomplete_field_tag :term, params[:term], welcome_autocomplete_event_name_path, {placeholder: "Busca el artista, deporte o evento", class: "input--text autocomplete-search-box form-control", :onblur => "this.value=validated(this.value); "}
+          %input.input--submit{:type => "submit", :value => "BUSCAR", :id => "autocomplete-search-box-submit"}
+          .live-results
+            .results__group#performerList
+              .results__title.title-artists Artistas
+              .results
+                .result.no-result
+                  %a{:href => ''} No hay resultados de tu búsqueda
+            .results__group#eventList
+              .results__title.title-events Eventos
+              .results
+                .result.no-result
+                  %a{:href => ''} No hay resultados de tu búsqueda
+
+
+      .menu-container.menu-container--without-logged
+        .menu-container__header
+          %p ¡Bienvenido!
+        .menu-container__content.shadow-in-mobile
+          = render 'partials/default/header_links'
+
+- elsif (controller_name == 'tickets' and action_name == 'sell_tickets')
+  %section.m-block--top
+    .overlay
+    .container
+      %nav
+        .logo
+          %a{:href => '/'}
+            %img{:src => '/assets/default/img/logo_blanco.png'}
+        -#   %span.beta-sign='BETA'
+        -# .beta-text
+        -#   Cualquier comentario nos lo puedes hacer llegar a
+        -#   %a{:href => "mailto:beta@bolettos.com"} beta@bolettos.com
+        .nav-buttons-right
+          %a.button--empty{:href => '/tickets/sell_tickets'} Vende boletos
+          - unless signed_in?
+            %a.button--empty{:href => '#', title:t('devise.links.sign_in'), "data-toggle" => "modal", "data-target" => "#loginModal"} Entrar
+          -else
+            %span.hello Hola, #{current_user.first_name}
+          .menu-button
+            %i.fa.fa-bars#menuButton
+      - if params[:event_id] or params[:event_id].nil?
+        .m-block--title__transparent
+          %img{:alt => "", :src => "/assets/default/img/icon-sell.png"}
+            %span Vender Boletos
+
+      .menu-container.menu-container--without-logged
+        .menu-container__header
+          %p ¡Bienvenido!
+        .menu-container__content
+          = render 'partials/default/header_links'
+
+- elsif (controller_name == 'tickets')
+  - image_url = @event.nil? ? '/assets/default/img/madonna.png' : @event.avatar.url
+  %section.m-block--top{style:"background: url(#{image_url});background-size:cover;"}
+    .overlay
+    .container
+      %nav
+        .logo
+          %a{:href => '/'}
+            %img{:src => '/assets/default/img/logo_blanco.png'}
+        -#   %span.beta-sign='BETA'
+        -# .beta-text
+        -#   Cualquier comentario nos lo puedes hacer llegar a
+        -#   %a{:href => "mailto:beta@bolettos.com"} beta@bolettos.com
+        .nav-buttons-right
+          %a.button--empty{:href => '/tickets/sell_tickets'} Vende boletos
+          - unless signed_in?
+            %a.button--empty{:href => '#', title:t('devise.links.sign_in'), "data-toggle" => "modal", "data-target" => "#loginModal"} Entrar
+          -else
+            %span.hello Hola, #{current_user.first_name}
+          .menu-button
+            %i.fa.fa-bars#menuButton
+      - if params[:event_id]
+        .m-block--title__transparent
+          %img{:alt => "", :src => "/assets/default/img/box-green.png"}
+            %span Comprar
+      .menu-container.menu-container--without-logged
+        .menu-container__header
+          %p ¡Bienvenido!
+        .menu-container__content.shadow-in-mobile
+          = render 'partials/default/header_links'
+- elsif (controller_name == 'publications' and action_name == 'new')
+  %section.container-fluid.h-image{:style => "background: url(#{@event_date.event.avatar.url}) no-repeat; background-size:cover"}
+    .section-overlay
+    .h-image__block
+      .container
+        %nav
+          .logo
+            %a{:href => '/'}
+              %img{:src => '/assets/default/img/logo_blanco.png'}
+          -#   %span.beta-sign='BETA'
+          -# .beta-text
+          -#   Cualquier comentario nos lo puedes hacer llegar a
+          -#   %a{:href => "mailto:beta@bolettos.com"} beta@bolettos.com
+          .nav-buttons-right
+            %a.button--empty{:href => '/tickets/sell_tickets'} Vende boletos
+            - unless signed_in?
+              %a.button--empty{:href => '#', title:t('devise.links.sign_in'), "data-toggle" => "modal", "data-target" => "#loginModal"} Entrar
+            -else
+              %span.hello Hola, #{current_user.first_name}
+            .menu-button
+              %i.fa.fa-bars#menuButton
+        .m-block--title__transparent
+          %img{:alt => "", :src => "/assets/default/img/icon-sell.png"}
+            %span Vender
+        .m-block--event-head
+          .m-block__event-title= @event_date.event.title
+          .m-block__event-quote= link_to '¿Te sobran?', tickets_sell_tickets_path(event_id: @event_date.event.id), title: 'Publicar boletos para este evente'
+          -# .m-block__event-quote= link_to '¿Te faltan?', tickets_path(event_id: @event.id), title: 'Comprar boletos para este evento'
+        .h-image__block--desktop.desktop-only
+          .row
+            .col-sm-4
+              .event-image{:style => "background: url(#{@event_date.event.avatar.url}) no-repeat; background-size:cover; background-position:50%;"}
+                -# %img.image-event{:alt => "", :src => "#{@event.avatar.url}"}
+            .col-sm-8.relative
+              .col-sm-2.h-image__block--desktop__button
+                %a.button--small--green{:href => "#{tickets_path(event_id: @event_date.event.id)}", :title => 'Comprar boletos para este evente'} ¿Te faltan?
+              .h-image__block--desktop__title= @event_date.event.title
+              .h-image__block--desktop__description
+                = raw(@event_date.event.description)
+
+              -# %a.button--small--green{:href => "#{tickets_path(event_id: @event.id)}", :title => 'Comprar boletos para este evento'} ¿Te faltan?
+        .menu-container.menu-container--without-logged
+          .menu-container__header
+            %p ¡Bienvenido!
+          .menu-container__content.shadow-in-mobile
+            = render 'partials/default/header_links'
+
+- elsif (controller_name == 'invoices')
+  %section.container-fluid.h-image{:style => "background: url(#{@publication.event.avatar.url}) no-repeat; background-size:cover"}
+    .section-overlay
+    .h-image__block
+      .container
+        %nav
+          .logo
+            %a{:href => '/'}
+              %img{:src => '/assets/default/img/logo_blanco.png'}
+          -#   %span.beta-sign='BETA'
+          -# .beta-text
+          -#   Cualquier comentario nos lo puedes hacer llegar a
+          -#   %a{:href => "mailto:beta@bolettos.com"} beta@bolettos.com
+          .nav-buttons-right.desktop-only
+            %a.button--empty{:href => '/tickets/sell_tickets'} Vende boletos
+            - unless signed_in?
+              %a.button--empty{:href => '#', title:t('devise.links.sign_in'), "data-toggle" => "modal", "data-target" => "#loginModal"} Entrar
+            -else
+              %span.hello Hola, #{current_user.first_name}
+            .mobile-only.cart
+              %span Tu orden
+              %a#cart{:href => "#"}
+                %img{:src => "/assets/default/img/icon-cart.png"}
+            .menu-button
+              %i.fa.fa-bars#menuButton
+        .m-block--title__transparent
+          %img{:alt => "", :src => "/assets/default/img/icon-buy.png"}
+            %span Comprar
+        .m-block--event-head
+          .m-block__event-title= @publication.event.title
+          .m-block__event-quote= link_to '¿Te sobran?', tickets_sell_tickets_path(event_id: @publication.event.id), title: 'Publicar boletos para este evente'
+          -# .m-block__event-quote= link_to '¿Te faltan?', tickets_path(event_id: @event.id), title: 'Comprar boletos para este evento'
+        .h-image__block--desktop.desktop-only
+          .row
+            .col-sm-4
+              .event-image{:style => "background:url(#{@publication.event.avatar.url}) no-repeat; background-size:cover; background-position:50%;"}
+                -# %img.image-event{:alt => "", :src => "#{@event.avatar.url}"}
+            .col-sm-8.relative
+              .col-sm-2.h-image__block--desktop__button
+                %a.button--small--green{:href => "#{tickets_sell_tickets_path(event_id: @publication.event.id)}", :title => 'Publicar boletos para este evente'} ¿Te sobran?
+              .h-image__block--desktop__title= @publication.event.title
+              .h-image__block--desktop__description
+                = raw(@publication.event.description)
+
+              -# %a.button--small--green{:href => "#{tickets_path(event_id: @event.id)}", :title => 'Comprar boletos para este evento'} ¿Te faltan?
+        .menu-container.menu-container--without-logged
+          .menu-container__header
+            %p ¡Bienvenido!
+          .menu-container__content.shadow-in-mobile
+            = render 'partials/default/header_links'
+
+- elsif (controller_name == 'events' and action_name == 'show')
+  %section.container-fluid.h-image{:style => "background: url(#{@event.avatar.url}) no-repeat; background-size:cover"}
+    .section-overlay
+    .h-image__block
+      .container
+        %nav
+          .logo
+            %a{:href => '/'}
+              %img{:src => '/assets/default/img/logo_blanco.png'}
+          -#   %span.beta-sign='BETA'
+          -# .beta-text
+          -#   Cualquier comentario nos lo puedes hacer llegar a
+          -#   %a{:href => "mailto:beta@bolettos.com"} beta@bolettos.com
+          .nav-buttons-right
+            %a.button--empty{:href => '/tickets/sell_tickets'} Vende boletos
+            - unless signed_in?
+              %a.button--empty{:href => '#', title:t('devise.links.sign_in'), "data-toggle" => "modal", "data-target" => "#loginModal"} Entrar
+            -else
+              %span.hello Hola, #{current_user.first_name}
+            .menu-button
+              %i.fa.fa-bars#menuButton
+        .m-block--title__transparent
+          %img{:alt => "", :src => "/assets/default/img/icon-buy.png"}
+            %span Comprar
+        .m-block--event-head
+          .m-block__event-title= @event.title
+          .m-block__event-quote= link_to '¿Te sobran?', tickets_sell_tickets_path(event_id: @event.id), title: 'Publicar boletos para este evente'
+          -# .m-block__event-quote= link_to '¿Te faltan?', tickets_path(event_id: @event.id), title: 'Comprar boletos para este evento'
+        .h-image__block--desktop.desktop-only
+          .row
+            .col-sm-4
+              .event-image{:style => "background: url(#{@event.avatar.url}) no-repeat; background-size:cover; background-position:50%;"}
+                -# %img.image-event{:alt => "", :src => "#{@event.avatar.url}"}
+            .col-sm-8.relative
+              .col-sm-2.h-image__block--desktop__button
+                %a.button--small--green{:href => "#{tickets_sell_tickets_path(event_id: @event.id)}", :title => 'Publicar boletos para este evente'} ¿Te sobran?
+              .h-image__block--desktop__title{:style => 'margin-top: 25px;'}= @event.title
+              .h-image__block--desktop__description{:style => 'font-size: 20px;'}= @event.event_sections.first.section.zone.venue.name if @event.event_sections.first
+
+              -# %a.button--small--green{:href => "#{tickets_path(event_id: @event.id)}", :title => 'Comprar boletos para este evento'} ¿Te faltan?
+        .menu-container.menu-container--without-logged
+          .menu-container__header
+            %p ¡Bienvenido!
+          .menu-container__content.shadow-in-mobile
+            = render 'partials/default/header_links'
+- elsif (controller_name == 'performers' and action_name == 'show')
+  %section.container-fluid.h-image{:style => "background: url(#{@performer.avatar.url}) no-repeat; background-size:cover"}
+    -# %img{:alt => "", :src => "#{@performer.avatar.url}"}
+    .section-overlay
+    .h-image__block
+      .container
+        %nav
+          .logo
+            %a{:href => '/'}
+              %img{:src => '/assets/default/img/logo_blanco.png'}
+          -#   %span.beta-sign='BETA'
+          -# .beta-text
+          -#   Cualquier comentario nos lo puedes hacer llegar a
+          -#   %a{:href => "mailto:beta@bolettos.com"} beta@bolettos.com
+          .nav-buttons-right
+            %a.button--empty{:href => '/tickets/sell_tickets'} Vende boletos
+            - unless signed_in?
+              %a.button--empty{:href => '#', title:t('devise.links.sign_in'), "data-toggle" => "modal", "data-target" => "#loginModal"} Entrar
+            -else
+              %span.hello Hola, #{current_user.first_name}
+            .menu-button
+              %i.fa.fa-bars#menuButton
+        .m-block--title__transparent
+          %img{:alt => "", :src => "/assets/default/img/icon-buy.png"}
+            %span Comprar
+        .m-block--event-head
+          .m-block__event-title= @performer.name
+          .m-block__event-quote= link_to '¿Buscas boletos?', tickets_path, title: 'Buscar boletos para esta artista'
+        .h-image__block--desktop.desktop-only
+          .row
+            .col-sm-4
+              .event-image{:style => "background: url(#{@performer.avatar.url}) no-repeat; background-size:cover; background-position:50%;"}
+                -# %img.image-event{:alt => "", :src => "#{@event.avatar.url}"}
+            .col-sm-8.relative
+              .col-sm-2.h-image__block--desktop__button
+                .button--small--green= link_to '¿Buscas boletos?', tickets_path, title: 'Buscar boletos para este artista'
+              .h-image__block--desktop__title= @performer.name
+              .h-image__block--desktop__description
+      .menu-container.menu-container--without-logged
+        .menu-container__header
+          %p ¡Bienvenido!
+        .menu-container__content.shadow-in-mobile
+          = render 'partials/default/header_links'
+- elsif (controller_name == 'publications' and action_name == 'show')
+  %section.container-fluid.h-image{:style => "background: url(/assets/default/img/bolettos-bg-alt.jpg) no-repeat;background-size: cover;"}
+    .container
+      %nav
+        .logo
+          %a{:href => '/'}
+            %img{:src => '/assets/default/img/logo_blanco.png'}
+        -#   %span.beta-sign='BETA'
+        -# .beta-text
+        -#   Cualquier comentario nos lo puedes hacer llegar a
+        -#   %a{:href => "mailto:beta@bolettos.com"} beta@bolettos.com
+        .nav-buttons-right
+          %a.button--empty{:href => '/tickets/sell_tickets'} Vende boletos
+          - unless signed_in?
+            %a.button--empty{:href => '#', title:t('devise.links.sign_in'), "data-toggle" => "modal", "data-target" => "#loginModal"} Entrar
+          -else
+            %span.hello Hola, #{current_user.first_name}
+          .menu-button
+            %i.fa.fa-bars#menuButton
+      .m-block--top__heading
+        %h1
+          %em> ¡
+          Boletos publicados
+          %em !
+        %h2 Tus boletos ya están publicados, sigue el progreso desde Mis Boletos
+
+      .menu-container.menu-container--without-logged
+        .menu-container__header
+          %p ¡Bienvenido!
+        .menu-container__content.shadow-in-mobile
+          = render 'partials/default/header_links'
+- elsif (controller_name == 'charges' and action_name == 'show')
+  %section.container-fluid.h-image{:style => "background: url(/assets/default/img/bolettos-bg.jpg) no-repeat;"}
+    .container
+      %nav
+        .logo
+          %a{:href => '/'}
+            %img{:src => '/assets/default/img/logo_blanco.png'}
+        -#   %span.beta-sign='BETA'
+        -# .beta-text
+        -#   Cualquier comentario nos lo puedes hacer llegar a
+        -#   %a{:href => "mailto:beta@bolettos.com"} beta@bolettos.com
+        .nav-buttons-right
+          %a.button--empty{:href => '/tickets/sell_tickets'} Vende boletos
+          - unless signed_in?
+            %a.button--empty{:href => '#', title:t('devise.links.sign_in'), "data-toggle" => "modal", "data-target" => "#loginModal"} Entrar
+          -else
+            %span.hello Hola, #{current_user.first_name}
+          .menu-button
+            %i.fa.fa-bars#menuButton
+      .m-block--top__heading
+        - if @charge.payment_method == 'store'
+          %h1.white
+            %em> ¡
+            Estás a un paso de tus boletos
+            %em !
+          %h2.white Enviaremos el formato a tu correo de pago por correo, imprímelo y llévalo a la tienda más cercana.
+        - else
+          %h1.white
+            %em> ¡
+            Ya tienes boletos
+            %em !
+          %h2.white Recibimos tu pago con éxito, sigue el progreso de tu orden en Mis Boletos
+      .menu-container.menu-container--without-logged
+        .menu-container__header
+          %p ¡Bienvenido!
+        .menu-container__content.shadow-in-mobile
+          = render 'partials/default/header_links'
+- elsif (controller_name == 'events_requests' or controller_name == 'public')
+  %section.m-block--top.public
+    .container
+      .row
+        .col-lg-12.col-md-12
+          %nav
+            .logo
+              %a{:href => '/'}
+                %img{:src => '/assets/default/img/logo_blanco.png'}
+            .nav-buttons-right
+              %a.button--empty{:href => '/tickets/sell_tickets'} Vende boletos
+              - unless signed_in?
+                %a.button--empty{:href => '#', title:t('devise.links.sign_in'), "data-toggle" => "modal", "data-target" => "#loginModal"} Entrar
+              -else
+                %span.hello Hola, #{current_user.first_name}
+              .menu-button
+                %i.fa.fa-bars#menuButton
+          %p.section-description--in-public
+            %img{:src => "#{@icon_image}"}
+            = @section_title
+      .menu-container.menu-container--without-logged
+        .menu-container__header
+          %p ¡Bienvenido!
+        .menu-container__content.shadow-in-mobile
+          = render 'partials/default/header_links'
+  %section.m-block-public-background{:style => "background-image:url('#{@background_image}')"}
+    .container
+      .row
+        .heading-public
+          .titles-container
+            %h1= @tagline
+            -if  @tagline_description
+              %h2= @tagline_description
+- else
+  %header
+    %nav.navigation
+      .container
+        .logo
+          %a{:href => '/'}
+            %img{:src => '/assets/default/img/logo_blanco.png'}
+        -#   %span.beta-sign='BETA'
+        -# .beta-text
+        -#   Cualquier comentario nos lo puedes hacer llegar a
+        -#   %a{:href => "mailto:beta@bolettos.com"} beta@bolettos.com
+        .nav-buttons-right
+          %a.button--empty{:href => '/tickets/sell_tickets'} Vende boletos
+          - unless signed_in?
+            %a.button--empty{:href => '#', title:t('devise.links.sign_in'), "data-toggle" => "modal", "data-target" => "#loginModal"} Entrar
+          -else
+            %span.hello Hola, #{current_user.first_name}
+          .menu-button
+            %i.fa.fa-bars#menuButton
+        .menu-container.menu-container--without-logged
+          .menu-container__header
+            %p ¡Bienvenido!
+          .menu-container__content.shadow-in-mobile
+            = render 'partials/default/header_links'

@@ -1,0 +1,19 @@
+.panel.panel-primary.col-lg-9
+  %p 
+    %b Name:
+    = @role.name
+  %p
+    %b Superadmin:
+    = t(@role.superadmin.to_s)
+  %p
+    %b Default user:
+    = t(@role.default_user.to_s)
+  %p
+    %b Custom:
+    = t(@role.custom.to_s)
+  %p
+    %b Description:
+    = @role.description
+  %p
+    %b Code:
+    = @role.code

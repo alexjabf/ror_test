@@ -1,0 +1,4 @@
+.row
+  .col-xs-12
+    = will_paginate eval("@#{controller_name}"), renderer: BootstrapPagination::Rails
+    = page_entries_info eval("@#{controller_name}")

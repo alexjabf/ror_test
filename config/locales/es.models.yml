@@ -1,0 +1,15 @@
+## YAML Template.
+---
+es:
+  activerecord:
+    models:
+      role: 'Role'
+      roles: 'Roles'
+      user: 'User'
+      users: 'Users'
+      event: 'Evento'
+      events: 'Eventos'
+      ticket: 'Boleto'
+      tickets: 'Boletos'
+      payment_type: 'Tipo de Pago'
+      payment_types: 'Tipos de Pago'      

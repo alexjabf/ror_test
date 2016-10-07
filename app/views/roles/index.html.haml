@@ -1,0 +1,26 @@
+.panel.panel-primary.col-lg-9
+  =render 'partials/admin/records_per_page'
+  %table.table
+    %thead
+      %tr
+        %th Id
+        %th Nombre
+        %th Super Administrador
+        %th Usuario
+        %th Personalizado
+        %th Descripción
+        %th Código
+        %th Acciones
+
+    %tbody
+      - @roles.each do |role|
+        - @model = role
+        %tr
+          %td= custom_link(controller_name, 'show', role.id, 'btn btn-xs btn-primary')
+          %td= role.name
+          %td= t(role.superadmin.to_s)
+          %td= t(role.default_user.to_s)
+          %td= t(role.custom.to_s)
+          %td= role.description
+          %td= role.code
+          %td= render 'partials/admin/index_links'

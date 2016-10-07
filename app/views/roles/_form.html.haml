@@ -1,0 +1,29 @@
+.panel.panel-primary.col-lg-9
+  = form_for @role do |f|
+    - if @role.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@role.errors.count, "error")} prohibited this role from being saved:"
+        %ul
+          - @role.errors.full_messages.each do |msg|
+            %li= msg
+
+    .field
+      = f.label :name
+      = f.text_field :name
+    .field
+      = f.label :superadmin
+      = f.check_box :superadmin
+    .field
+      = f.label :default_user
+      = f.check_box :default_user
+    .field
+      = f.label :custom
+      = f.check_box :custom
+    .field
+      = f.label :description
+      = f.text_area :description
+    .field
+      = f.label :code
+      = f.text_field :code
+    .actions
+      = f.submit 'Guardar', class: 'btn btn-default'

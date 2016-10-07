@@ -1,0 +1,123 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    %meta{:charset => "utf-8"}
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
+    %meta{:content => "Prueba de Desarrollo de Boletia", :name => "description"}
+    %meta{:content => "Alejandro Ballesteros", :name => "author"}
+    %title Prueba
+    = csrf_meta_tags
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track':'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+  %body
+    :javascript
+      window.fbAsyncInit = function () {
+        FB.init({
+          appId: "#{ENV['FACEBOOK_APP_ID']}",
+          xfbml: true,
+          version: 'v2.6'
+        });
+      };
+
+      (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {
+          return;
+        }
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    / Navigation
+    %nav.navbar.navbar-inverse.navbar-fixed-top{:role => "navigation"}
+      .container
+        / Brand and toggle get grouped for better mobile display
+        .navbar-header
+          %button.navbar-toggle{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{:href => "/"} Prueba
+        / Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          %ul.nav.navbar-nav.navbar-right
+            - if signed_in?
+              %li
+                =link_to 'Mi Cuenta', current_user
+              %li
+                =link_to 'Salir', destroy_user_session_path, method: :delete
+            - else    
+              %li.dropdown
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                  Entrar/Registrarse
+                  %b.caret
+                %ul.dropdown-menu
+                  %li
+                    =link_to 'Entrar', new_user_session_path
+                  %li
+                    =link_to 'Registrarse', new_user_registration_path
+
+        / /.navbar-collapse
+      / /.container
+    / /.row
+    = flash_message
+    - if controller_name == 'welcome' and action_name == 'index' and !is_admin?
+      / Header Carousel
+      %header#myCarousel.carousel.slide
+        / Indicators
+        %ol.carousel-indicators
+          %li.active{"data-slide-to" => "0", "data-target" => "#myCarousel"}
+          %li{"data-slide-to" => "1", "data-target" => "#myCarousel"}
+          %li{"data-slide-to" => "2", "data-target" => "#myCarousel"}
+        / Wrapper for slides
+        .carousel-inner
+          .item.active
+            = image_tag('/assets/metallica2.jpg', width:'1900')
+          .item
+            = image_tag('/assets/guns.jpg', width:'1900px')
+          .item
+            = image_tag('/assets/mm.jpg', width:'1900px')
+        / Controls
+        %a.left.carousel-control{"data-slide" => "prev", :href => "#myCarousel"}
+          %span.icon-prev
+        %a.right.carousel-control{"data-slide" => "next", :href => "#myCarousel"}
+          %span.icon-next
+    .container
+      - if is_admin?
+        .row
+          .col-lg-12
+            %h1.page-header
+              Proximos Eventos
+              %small Compra tus boletos antes de que se agoten
+            %ol.breadcrumb
+              %li
+                %a{:href => "/"} Inicio
+              %li.active Eventos mas populares
+        .row
+          / Sidebar Column
+          .col-md-3
+            .list-group
+              %a.list-group-item{:href => "/roles"} Roles
+              %a.list-group-item{:href => "/users"} Usuarios
+          = yield
+          =render 'partials/admin/pagination' if show_pagination?
+          %hr
+          =render 'partials/admin/action_links' unless controller_name == 'welcome'
+      - else
+        = yield
+        =render 'partials/admin/pagination' if show_pagination?
+      / Footer
+      %footer
+        .row
+          .col-lg-12
+            %p{:style => 'text-align: center;'} Copyright © Prueba por Alejandro Ballesteros 2016
+    / /.container
+    :javascript
+      $('.carousel').carousel({
+          interval: 5000 //changes the speed
+      })

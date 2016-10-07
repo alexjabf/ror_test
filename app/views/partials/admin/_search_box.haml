@@ -1,0 +1,7 @@
+.search-box
+  .search-form
+    = form_tag '#', method: :get, id: 'main-search-form', role: 'form' do
+      .search-input-colum
+        = search_field_tag :search, params[:search], class: 'search-text-field', placeholder: t('actions.main_search'), title: t('actions.main_search')
+      .search-button-colum
+      = button_tag nil, class: 'search-button-colum search-icon', title: t('actions.main_search')

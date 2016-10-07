@@ -1,0 +1,36 @@
+.btn-group
+  %button.btn.btn-white.dropdown-toggle{'data-toggle':'dropdown', 'aria-haspopup':'true', 'aria-expanded':'true'}
+    %i.fa.fa-cog
+    %span.caret
+  %ul.dropdown-menu
+    - if can? :show, eval(get_controller_name.camelize.singularize) and has_action?(nil, 'show')
+      %li
+        = link_to @model, title: t('actions.show',  model: t("activerecord.models.#{get_controller_name.singularize}")) do
+          %i.fa.fa-eye-slash
+          = t('actions.show',  model: t("activerecord.models.#{get_controller_name.singularize}"))
+    - if can? :edit, eval(get_controller_name.camelize.singularize) and has_action?(nil, 'edit')
+      %li.divider
+      - if get_controller_name == "users" and @model.id != current_user.id
+        %li
+          = link_to edit_admin_user_path(@model), title: t('actions.edit',  model: t("activerecord.models.#{get_controller_name.singularize}")) do
+            %i.fa.fa-pencil
+            = t('actions.edit',  model: t("activerecord.models.#{get_controller_name.singularize}"))
+      - else
+        %li
+          = link_to eval("edit_#{get_controller_name.singularize}_path(@model)"), title: t('actions.edit',  model: t("activerecord.models.#{get_controller_name.singularize}")) do
+            %i.fa.fa-pencil
+            = t('actions.edit',  model: t("activerecord.models.#{get_controller_name.singularize}"))
+    - if can? :destroy, eval(get_controller_name.camelize.singularize) and has_action?(nil, 'destroy')
+      - if get_controller_name == "users"
+        - unless @model.id == current_user.id
+          %li.divider
+          %li
+            = link_to @model, method: :delete, data: { confirm: t('actions.are_you_sure?', model: t("activerecord.models.#{get_controller_name.singularize}")) }, title: t('actions.destroy',  model: t("activerecord.models.#{get_controller_name.singularize}")) do
+              %i.fa.fa-trash-o
+              = t('actions.destroy',  model: t("activerecord.models.#{get_controller_name.singularize}"))
+      - else
+        %li.divider
+        %li
+          = link_to @model, method: :delete, data: { confirm: t('actions.are_you_sure?', model: t("activerecord.models.#{get_controller_name.singularize}")) }, title: t('actions.destroy',  model: t("activerecord.models.#{get_controller_name.singularize}")) do
+            %i.fa.fa-trash-o
+            = t('actions.destroy',  model: t("activerecord.models.#{get_controller_name.singularize}"))

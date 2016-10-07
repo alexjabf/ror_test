@@ -1,0 +1,72 @@
+.container
+  .navbar-header
+    .navbar-toggle
+      = button_tag nil, class: 'navbar-toggle-button', title: t('layouts.application.home')
+    .navbar-brand
+      = link_to root_path, title: t('layouts.application.home') do
+        = image_tag('/assets/bolettos/navbar/bolettos.png')
+      %span.caption= link_to t('layouts.application.sell_or_buy'), root_path, title: t('layouts.application.sell_or_buy')
+  .collapse.navbar-collapse
+    %ul.nav.navbar-nav.navbar-right
+      %li
+        = link_to t('layouts.application.home'), root_path, title: t('layouts.application.home')
+      %li.dropdown
+        -# = link_to '#', title: t('layouts.application.events'), class: 'dropdown-toggle', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': true, 'aria-expanded': false do
+          = t('layouts.application.events')
+          %span.caret
+        %ul.dropdown-menu
+          %li
+            = link_to t('layouts.application.sports'), root_path, title: t('layouts.application.sports')
+          %li
+            = link_to t('layouts.application.concerts'), root_path, title: t('layouts.application.concerts')
+          %li
+            = link_to t('layouts.application.shows'), root_path, title: t('layouts.application.shows')
+      %li
+        = link_to t('layouts.application.how_it_works'), public_how_it_works_path, title: t('layouts.application.how_it_works')
+      %li
+        = link_to t('layouts.application.contact'), new_contact_path, title: t('layouts.application.contact')
+      - if signed_in?
+        %li
+          = link_to root_path, title: t('layouts.application.sell_tickets') do
+            %i.fa.fa-ticket.sell_link
+              = t('layouts.application.sell_tickets')
+        %li
+          = link_to current_user, title: t('layouts.partials.navbar.show_my_account') do
+            %i.fa.fa-user.user_session
+              = current_user.full_name
+        %li
+          = link_to destroy_session_path, title: t('layouts.partials.navbar.sign_out') do
+            %i.fa.fa-sign-out.user_session
+              = t('layouts.partials.navbar.sign_out')
+      - else
+        %li
+          = link_to public_how_it_works_path, title: t('layouts.application.sell_tickets') do
+            %i.fa.fa-ticket.sell_link
+              = t('layouts.application.sell_tickets')
+        - unless controller_name == 'registrations' or controller_name == 'sessions'
+          %li
+            = link_to new_registration_path(resource_name), title: t('devise.links.sign_up') do
+              %i.fa.fa-pencil.user_session
+                = t('devise.links.sign_up')
+        %li
+          - if controller_name == 'sessions'
+            = link_to new_registration_path(resource_name), title: t('devise.links.sign_up') do
+              %i.fa.fa-pencil.user_session
+                = t('devise.links.sign_up')
+          - else
+          = link_to new_session_path(resource_name), title: t('devise.links.sign_in') do
+            %i.fa.fa-pencil.user_session
+              = t('devise.links.sign_in')
+      -#%li.dropdown
+        -#= link_to '#', title: t('layouts.partials.navbar.languages'), class: 'dropdown-toggle', 'data-toggle': 'dropdown', role: 'button', 'aria-haspopup': true, 'aria-expanded': false do
+          -#%i= image_tag("/assets/countries_flags/#{I18n.locale}.png", class: 'flag')
+          -#%span.caret.flag-dropdown
+        -#%ul.dropdown-menu
+          -#%li
+            -#= link_to url_for(params.merge(locale: 'es')), title: t('layouts.partials.navbar.change_to_spanish') do
+              -#= image_tag('/assets/countries_flags/es.png', class: 'flag')
+              -#= t('layouts.partials.navbar.change_to_spanish')
+          -#%li
+            -#= link_to url_for(params.merge(locale: 'en')), title: t('layouts.partials.navbar.change_to_english') do
+              -#= image_tag('/assets/countries_flags/en.png', class: 'flag')
+              -#= t('layouts.partials.navbar.change_to_english')

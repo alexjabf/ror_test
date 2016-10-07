@@ -1,0 +1,213 @@
+%meta{:charset => "utf-8"}
+%title= t("activerecord.models.#{controller_name}")
+%meta{:content => "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no", :name => "viewport"}
+%meta{:content => "", :name => "description"}
+%meta{:content => "", :name => "author"}
+%link{:href => "/assets/favicon/apple-icon-57x57.png", :rel => "apple-touch-icon", :sizes => "57x57"}
+%link{:href => "/assets/favicon/apple-icon-60x60.png", :rel => "apple-touch-icon", :sizes => "60x60"}
+%link{:href => "/assets/favicon/apple-icon-72x72.png", :rel => "apple-touch-icon", :sizes => "72x72"}
+%link{:href => "/assets/favicon/apple-icon-76x76.png", :rel => "apple-touch-icon", :sizes => "76x76"}
+%link{:href => "/assets/favicon/apple-icon-114x114.png", :rel => "apple-touch-icon", :sizes => "114x114"}
+%link{:href => "/assets/favicon/apple-icon-120x120.png", :rel => "apple-touch-icon", :sizes => "120x120"}
+%link{:href => "/assets/favicon/apple-icon-144x144.png", :rel => "apple-touch-icon", :sizes => "144x144"}
+%link{:href => "/assets/favicon/apple-icon-152x152.png", :rel => "apple-touch-icon", :sizes => "152x152"}
+%link{:href => "/assets/favicon/apple-icon-180x180.png", :rel => "apple-touch-icon", :sizes => "180x180"}
+%link{:href => "/assets/favicon/android-icon-192x192.png", :rel => "icon", :sizes => "192x192", :type => "image/png"}
+%link{:href => "/assets/favicon/favicon-32x32.png", :rel => "icon", :sizes => "32x32", :type => "image/png"}
+%link{:href => "/assets/favicon/favicon-96x96.png", :rel => "icon", :sizes => "96x96", :type => "image/png"}
+%link{:href => "/assets/favicon/favicon-16x16.png", :rel => "icon", :sizes => "16x16", :type => "image/png"}
+%link{:href => "/assets/favicon/manifest.json", :rel => "manifest"}
+%meta{:content => "#ffffff", :name => "msapplication-TileColor"}
+%meta{:content => "/ms-icon-144x144.png", :name => "msapplication-TileImage"}
+%meta{:content => "#ffffff", :name => "theme-color"}
+
+- unless controller_name == 'warnings'
+  %noscript
+    %meta{:content => "0;url=/warnings/javascript.html", "http-equiv" => "refresh"}
+
+- if is_admin? and !admin_exception
+  / ================== BEGIN BASE CSS STYLE ==================
+  %link{:href => "http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700", :rel => "stylesheet"}
+
+  / ================== END BASE CSS STYLE ==================
+  = stylesheet_link_tag    "admin/application", media: "all", "data-turbolinks-track" => true
+  = csrf_meta_tags
+
+  / ================== BEGIN PAGE LEVEL CSS STYLE ==================
+  = stylesheet_link_tag    "admin/welcome", media: "all" if controller_name == 'welcome'
+  = stylesheet_link_tag    "admin/data_tables", media: "all" if include_data_tables?
+  = stylesheet_link_tag    "admin/form_plugins", media: "all" if include_form_plugins?
+
+  /Google Maps
+  %script{:type=>"text/javascript", :src => "//maps.google.com/maps/api/js?v=3.13&amp;sensor=false&amp;libraries=geometry"}
+  %script{:type=>"text/javascript", :src => "//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js"}
+
+  /Recaptcha locale 
+  %script{:type=>"text/javascript", :src => "https://www.google.com/recaptcha/api.js?hl=#{I18n.locale}"}
+
+- else
+  / ================== BEGIN PAGE LEVEL CSS STYLE ==================
+  = stylesheet_link_tag    "default/application", media: "all"
+  = csrf_meta_tags
+
+-#SERVER SIDE VARIABLES
+%script{:type=>"text/javascript"}
+  -#Global Varialbles
+  var has_form_errors = false;
+  var form_errors = null;
+  var minutes_left = null;
+  var ticket_minutes_left = null;
+  var show_video = false;
+
+  - unless @model.nil?
+    - if @model.errors.any?
+      has_form_errors = true; 
+      form_errors = "#{@model.errors.messages}";
+    - else
+      has_form_errors = false;  
+  var controller_name = "#{controller_name}";
+  var singular_controller_name = "#{controller_name.singularize}";
+  var global_action_name = "#{action_name}";
+  var current_url = "#{request.original_url}"
+  var last_url = "#{request.referrer}";
+  var current_language = "#{I18n.locale}";
+  var current_time = "#{Time.now.strftime("%Y/%m/%d %l:%M:%S")}";
+  var charge_counter_time = "#{(Time.now + 6.minutes).strftime("%Y/%m/%d %l:%M:%S")}";
+  - if signed_in?
+    var current_user_id = "#{current_user.id}";
+    var sent_step_zero = true;
+    var sent_step_one = true;
+    var sent_step_two = true;
+    var sent_step_three = true;
+    var sent_step_four = true;
+    var purchase_step_zero = true;
+    var purchase_step_one = true;
+    var purchase_step_two = true;
+    var purchase_step_three = true;
+    var purchase_step_four = true;
+    var purchase_step_five = true;
+    var purchase_step_six = true;
+    var purchase_step_seven = true;
+    var purchase_step_eight = true;
+    var purchase_step_nine = true;
+    var purchase_step_ten = true;
+  -#Required Params for Satets, Cities, Venues and Zones
+  var country_id = "#{params[:country_id]}";
+  var state_id = "#{params[:state_id]}";
+  var city_id = "#{params[:city_id]}";
+  var venue_id = "#{params[:venue_id]}";
+  var zone_id = "#{params[:zone_id]}";
+
+  -#Required Params for Events sections
+  if (controller_name === 'events' && global_action_name === 'create'){
+  var current_sections = []
+  - unless params[:sections].nil?
+    - params[:sections].each_with_index do |param, index|
+      current_sections["#{index}"] = "#{param[0]}";
+  var current_face_values = []
+  - unless params[:face_values].nil?
+    - params[:face_values].each_with_index do |param, index|
+      current_face_values["#{index}"] = [["#{param[0]}"], ["#{param[1]}"]];
+  var current_discounts = []
+  - unless params[:discounts].nil?
+    - params[:discounts].each_with_index do |param, index|
+      current_discounts["#{index}"] = [["#{param[0]}"], ["#{param[1]}"]];
+  var current_requires_seat_number = []
+  - unless params[:requires_seat_number].nil?
+    - params[:requires_seat_number].each_with_index do |param, index|
+      current_requires_seat_number["#{index}"] = "#{param[0]}";
+  }
+
+  -#Required Params for publications
+  if (controller_name === 'publications' && global_action_name === 'create'){
+  - unless params[:publication].nil?
+    var publication_tickets_number = "#{params[:publication][:tickets_number]}";
+  }
+
+  -#Required Params for charges
+  if (controller_name === 'charges' && global_action_name === 'new'){
+  - unless params[:invoice_id].nil?
+    var invoice_id = "#{params[:invoice_id]}";
+  }
+
+  -#Get sections colors
+  - if controller_name == 'tickets' and action_name == 'index' and !@event_sections_colors.nil?
+    var section_colors = "#{@event_sections_colors}";
+    var current_event_id = "#{@event.id}"
+    - if @event_date.nil?
+      var current_event_date_id = null;
+    - else
+      var current_event_date_id = "#{@event_date.id}";
+
+  var has_address = false;
+  if (controller_name === 'publications' && (global_action_name === 'new' || global_action_name === 'create' || global_action_name === 'edit' || global_action_name === 'update')){
+  - unless @last_publication.nil?
+    has_address = true;
+  }
+  var event_section_requires_seat_number = false;
+  if (controller_name === 'publications' && (global_action_name === 'edit' || global_action_name === 'update')){
+  - unless @publication.nil?
+    var event_section_requires_seat_number = "#{@requires_seat_number}";
+  }
+  if (controller_name === 'invoices' && (global_action_name === 'new' || global_action_name === 'create' || global_action_name === 'edit' || global_action_name === 'update')){
+  - unless @last_invoice.nil? and @current_event.nil?
+    var current_event_id = "#{@current_event.id}";
+    has_address = true;
+  }
+
+  -#I18n 
+  var prompt = "#{t('helpers.select.prompt')}";
+  var prompt_required = "#{t('prompt_required')}"
+  var prompt_not_required = "#{t('prompt_not_required')}"
+
+  -#Validations Types
+  var search = "#{t('validations.types.search')}";
+  var global_validation = "#{t('validations.types.global_validation')}";
+  var number = "#{t('validations.types.number')}";
+  var address = "#{t('validations.types.address')}";
+  var phone = "#{t('validations.types.phone')}";
+  var url = "#{t('validations.types.url')}";
+  var date = "#{t('validations.types.date')}";
+  var datetime = "#{t('validations.types.datetime')}";
+  var timestamp = "#{t('validations.types.timestamp')}";
+  var text = "#{t('validations.types.text')}";
+  var name = "#{t('validations.types.name')}";
+  var username = "#{t('validations.types.username')}";
+  var login = "#{t('validations.types.login')}";
+  var zip = "#{t('validations.types.zip')}";
+  var email = "#{t('validations.types.email')}";
+  var password = "#{t('validations.types.password')}";
+  var time = "#{t('validations.types.time')}";
+  var boolean = "#{t('validations.types.boolean')}";
+  var decimal = "#{t('validations.types.decimal')}";
+  var ip_address = "#{t('validations.types.ip_address')}";
+
+  -#validation Messages
+  var wrong_format = "#{t('validations.messages.wrong_format')}";
+  var global_message_validator = "#{t('validations.messages.global_message_validator')}";
+  var ip_address_message_validator = "#{t('validations.messages.ip_address_message_validator')}"
+  var date_message_validator = "#{t('validations.messages.date_message_validator')}";
+  var time_message_validator = "#{t('validations.messages.time_message_validator')}";
+  var text_message_validator = "#{t('validations.messages.text_message_validator')}";
+  var address_message_validator = "#{t('validations.messages.address_message_validator')}";
+  var names_message_validator = "#{t('validations.messages.names_message_validator')}";
+  var number_message_validator = "#{t('validations.messages.number_message_validator')}";
+  var zip_message_validator = "#{t('validations.messages.zip_message_validator')}";
+  var phone_message_validator = "#{t('validations.messages.phone_message_validator')}";
+  var decimal_message_validator = "#{t('validations.messages.decimal_message_validator')}";
+  var email_message_validator = "#{t('validations.messages.email_message_validator')}";
+  var url_message_validator = "#{t('validations.messages.url_message_validator')}";
+  var login_message_validator = "#{t('validations.messages.login_message_validator')}";
+  var password_message_validator = "#{t('validations.messages.password_message_validator')}";
+  var other_message_validator = "#{t('validations.messages.other_message_validator')}";
+  var username_message_validator = "#{t('validations.messages.username_message_validator')}";
+  var min_length_message_validator = "#{t('validations.messages.min_length_message_validator')}";
+  var max_length_message_validator = "#{t('validations.messages.max_length_message_validator')}";
+  var boolean_message_validator = "#{t('validations.messages.boolean_message_validator')}";
+  var availible_message_validator = "#{t('validations.messages.availible_message_validator')}";
+  var coordinates_message_validator = "#{t('validations.messages.coordinates_message_validator')}";
+  var commun_chars_message_validator = "#{t('validations.messages.commun_chars_message_validator')}";
+  var avatar_message_validator = "#{t('validations.messages.avatar_message_validator')}";
+  var datetime_message_validator = "#{t('validations.messages.datetime_message_validator')}";
+  var radiobutton_message_validator = "#{t('validations.messages.radiobutton_message_validator')}";
+  var chars_message_validator = "#{t('validations.messages.chars_message_validator')}";

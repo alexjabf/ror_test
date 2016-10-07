@@ -1,0 +1,5 @@
+.container
+  .row
+    .col-sm-2.col-xs-4.records_per_page
+      = form_tag eval("#{controller_name}_path"), method: :get, id: 'selec-records-number' do
+        = select_tag(:per_page, options_for_select([1,5,10,20,30,40,50,60,70,80,90,100, [t('all_records'), eval("@#{controller_name}.count")]], params[:per_page].to_i), {prompt: t('select_page_numbers'), onchange: 'this.form.submit();', class: 'form-control' })
