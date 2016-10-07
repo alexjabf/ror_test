@@ -1,0 +1,33 @@
+/ Projects Row
+.row
+  .col-lg-12
+    %h1.page-header
+      Detalles de Tus Contactos
+      %small Aquí puedes ver y editar tus contactos o dar de baja alguno.
+    %ol.breadcrumb
+      %li
+        %a{:href => "/"} Inicio
+      %li.active Contactos
+.panel.panel-primary.col-lg-12
+  %p
+    %b Id:
+    = @user_contact.id
+  - if is_admin?
+    %p
+      %b Su Contacto:
+      = @user_contact.user.full_name if @user_contact.user
+  %p
+    %b Nombre:
+    = @user_contact.name
+  %p
+    %b Email:
+    = @user_contact.email
+  %p
+    %b Telefono:
+    = @user_contact.phone
+  %p
+    %b Dirección:
+    = @user_contact.address
+  - if can? :destroy, User  
+    %p
+      = button_to "Eliminar Contacto", @user_contact, data: { confirm: "Estas seguro que deseas eliminar este contacto?" }, method: :delete, class: 'btn btn-danger'

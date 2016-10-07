@@ -5,6 +5,7 @@
 #VALIDATIONS VARIABLES
 USERNAME = /^[a-z0-9 ._]+$/
 PASSWORD = /^[a-zA-Z0-9 ._]+$/
+PHONE = /^[0-9 ()-]+$/
 CHARS = /^[a-zA-Z]+$/
 NAMES = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ .,]+$/
 ALPHANUMERIC = /^[a-zA-Z0-9]+$/

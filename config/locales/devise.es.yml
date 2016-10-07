@@ -1,21 +1,37 @@
 # Traducciones adicionales en https://github.com/plataformatec/devise/wiki/I18n
 
 es:
+  activerecord:
+    models:
+      session: 'Iniciar Sesión'
+      sessions: 'Iniciar Sesión'
+      confirmation: '¿No recibiste las instrucciones de confirmación?'
+      confirmations: '¿No recibiste las instrucciones de confirmación?' 
+      registration: 'Registrarme'
+      registrations: 'Registrarme'     
+      unlock: '¿No recibiste las instrucciones de activación?'
+      unlocks: '¿No recibiste las instrucciones de activación?'  
+      password: '¿Olvidaste tu contraseña?'
+      passwords: '¿Olvidaste tu contraseña?'
+      
   errors:
     messages:
-      expired: "ha expirado, por favor solicite uno nuevo."
-      not_found: "no encontrado."
-      already_confirmed: "Su cuenta ya se encuentra confirmada, por favor intente ingresar."
-      not_locked: "Su cuenta no está bloqueada."
-      account_inactive: "Su cuenta ha sido desactivada, por favor contacté a su administrador."
+      expired: 'ha expirado, por favor solicita uno nuevo.'
+      not_found: 'no encontrado.'
+      already_confirmed: 'Tu cuenta ya se encuentra confirmada, por favor intenta iniciar sesión.'
+      not_locked: 'Tu cuenta no está bloqueada, por favor intenta iniciar sesión.'
+      account_inactive: 'Tu cuenta ha sido desactivada.  Para reactivarla, por favor contactanos.'
+      not_inspector: 'No estás registrado como administrador; no estás autorizado para hacer esto.'
       not_saved:
-        one: "Un error evitó que este usuario fuera registrado:"
-        other: "%{count} errores evitaron que este usuario fuera registrado:"
+        one: 'Hemos encontrado errores con la información ingresada. Por favor revisa tus datos.'
+        other: 'Hemos encontrado %{count} con la información ingresada. Por favor revisa tus datos.'
 
   devise:
-    terms_login_html: "Al iniciar sesión aceptas los <a href='/public/terms' target='_blank' title='Términos y Condiciones'>Términos y Condiciones</a> y el <a href='/public/privacy' target='_blank' title='Aviso de Privacidad Integral'>Aviso de Privacidad</a> de Klinzi.mx"
-    terms_send_email_html: "Acepto los <a href='/public/terms' target='_blank' title='Términos y Condiciones'>Términos y Condiciones</a> y el <a href='/public/privacy' target='_blank' title='Aviso de Privacidad Integral'>Aviso de Privacidad</a> de Klinzi.mx"
-    enter_email: 'Ingresa tu correo electrónico'
+    sign_in: 'INICIAR SESIÓN'    
+    hello: 'Hola'
+    terms_login_html: "Al iniciar sesión aceptas los <a href='/public/terms' target='_blank' title='Términos y Condiciones'>Términos y Condiciones</a> y el <a href='/public/privacy' target='_blank' title='Aviso de Privacidad Integral'>Aviso de Privacidad</a> de Bolettos.com"
+    terms_send_email_html: "Acepto los <a href='/public/terms' target='_blank' title='Términos y Condiciones'>Términos y Condiciones</a> y el <a href='/public/privacy' target='_blank' title='Aviso de Privacidad Integral'>Aviso de Privacidad</a> de Bolettos.com"
+    enter_email: 'Ingresa tu correo electrónico'   
     links:
       sign_in_with_email: 'Entrar con Email'
       sign_in: 'Iniciar sesión'
@@ -25,56 +41,73 @@ es:
       conf_inst: '¿No recibiiste las instrucciones de confirmación?'
       unlock_inst: '¿No recibiste las instrucciones de desbloqueo?'
       access_links: '¿Necesitas ayuda para ingresar a tu cuenta?'
+    titles:
+      sign_in: 'Iniciar sesión'
+      sign_up: 'Regístrate'
+      sign_up_to_sell: 'Regístrate para poder vender'
+      forgot_password: '¿Olvidaste tu contraseña?'
+      unlock_inst: '¿No recibiste las instrucciones de desbloqueo?'
     failure:
       user:
-        not_found_in_database: 'El usuario no existe en el sistema.'
-      already_authenticated: 'La cuenta ya ah sido confirmada.'         
-      unauthenticated: 'Es necesario iniciar sesión o registrarse para continuar.'
-      unconfirmed: 'Debe confirmar su cuenta para continuar.'
-      locked: 'Su cuenta está bloqueada.'
+        not_found_in_database: No te tenemos registrado en nuestro sistema.  Por favor intenta de nuevo
+        last_attempt: 'Te queda una última oportunidad de ingresar antes de que tu cuenta sea bloqueada.'
+      already_authenticated: 'Este correo ya se encuentra registrado.  Inicia sesión, o regístrate con un correo nuevo.'         
+      unauthenticated: 'Es necesario que inicies sesión o te registres para continuar.'
+      unconfirmed: 'Debes confirmar tu cuenta para continuar.'
+      locked: 'Cuenta bloqueada.  Contáctanos para desbloquearla.'
       invalid: 'Correo o contraseña inválidos.'
       invalid_token: 'Ficha de autenticación inválida.'
-      timeout: 'Su sesión ha expirado, por favor inicie sesión nuevamente para continuar.'
-      inactive: 'Su cuenta aún no ha sido activada.'
+      timeout: 'Tu sesión ha expirado, por favor inicia sesión nuevamente para continuar.'
+      inactive: 'Tu cuenta aún no ha sido activada.'
     sessions:
-      signed_in: 'Usted ha ingresado al sistema satisfactoriamente.'
-      signed_out: 'Usted ha salido del sistema satisfactoriamente.'
-      email: "Correo Electrónico" 
+      user:
+        already_signed_out: 'Todavía no has iniciado sesión.'
+      signed_in: 'Sesión iniciada correctamente.'
+      signed_out: 'Sesión cerrada correctamente.'
+      enter_login: 'Ingresa tu Correo Electrónico'
+      enter_password: 'Ingresa tu Contraseña'      
+      email: 'Correo Electrónico' 
     passwords:
-      send_instructions: 'En unos minutos usted recibirá un correo electrónico con instrucciones sobre cómo reiniciar su contraseña.'
-      updated: 'Su contraseña fue cambiada exitosamente. Usted ha sido ingresado al sistema.'
-      updated_not_active: 'Su contraseña fue cambiada exitosamente.'
-      send_paranoid_instructions: "Si su correo electrónico existe en nuestra base de datos, en unos minutos usted recibirá un correo con un enlace para reestablecer su contraseña."
-      no_token: 'No puede acceder a esta página si no proviene de un correo de reestablecimiento de contraseña. Si usted proviene de un correo de reestablecimiento de contraseña, por favor asegúrese que está utilizando la URL completa."'
-      password: "Contraseña"
-      email: "Correo Electrónico"   
+      send_instructions: 'En unos minutos recibirás un correo electrónico con instrucciones sobre cómo restablecer tu contraseña.'
+      updated: 'Tu contraseña fue restablecida exitosamente.'
+      updated_not_active: 'Tu contraseña fue cambiada exitosamente.'
+      send_paranoid_instructions: 'Si ya te habías registrado con nosotros, en unos minutos recibirás un correo con instrucciones para reestablecer tu contraseña.'
+      no_token: 'No puedes entrar a esta página si no provienes de un correo de reestablecimiento de contraseña. Si provienes de un correo de reestablecimiento de contraseña, por favor asegúrate que ingresaste la URL completa.'
+      password: 'Contraseña'
+      enter_new_password: 'Ingresa tu nueva contraseña'
+      enter_new_password_confirmation: 'Confirma tu nueva contraseña'
+      email: 'Correo Electrónico'  
+      change_password: 'Restablecer contraseña'
     confirmations:
-      send_instructions: 'En unos minutos usted recibirá un correo electrónico con instrucciones sobre cómo confirmar su cuenta.'
-      send_paranoid_instructions: 'Si su correo electrónico existe en nuestra base de datos, en unos minutos usted recibirá un correo con instrucciones sobre cómo confirmar su cuenta.'
-      confirmed: 'Su cuenta fue confirmada exitosamente. Usted ha sido ingresado al sistema.'
-      email: "Correo Electrónico" 
-      confirmation_token: "Token de confirmación invalido"      
+      send_instructions: 'En unos minutos recibirás un correo electrónico con instrucciones sobre cómo restablecer tu contraseña.'
+      send_paranoid_instructions: 'Si ya te habías registrado con nosotros, en unos minutos recibirás un correo con instrucciones para reestablecer tu contraseña.'
+      confirmed: 'Tu cuenta fue creada exitosamente.'
+      email: 'Correo Electrónico' 
+      confirmation_token: 'Token de confirmación inválido'      
     registrations:
-      signed_up: '¡Bienvenido! Ha ingresado al sistema exitosamente.'
-      signed_up_but_unconfirmed: 'Un correo con el enlace de confirmación de su cuenta ha sido enviado a su correo electrónico. Por favor abra el enlace para activar su cuenta.'
-      signed_up_but_inactive: 'Se ha registrado satisfactoriamente. Sin embargo, no es posible ingresarlo al sistema debido a que su cuenta aún no ha sido activada.'
-      signed_up_but_locked: 'Se ha registrado satisfactoriamente. Sin embargo, no es posible ingresarlo al sistema debido a que su cuenta se encuentra bloqueada.'
-      updated: 'Ha actualizado su cuenta satisfactoriamente.'
-      update_needs_confirmation: "Ha actualizado su cuenta satisfactoriamente, pero es necesario verificar su correo electrónico. Por favor, verifique su bandeja de entrada y dé clic en el enlace de confirmación para finalizar el proceso."
-      destroyed: 'Adiós! Su cuenta fue cancelada satisfactoriamente. Esperamos verlo pronto nuevamente.'
-      email: "Correo Electrónico" 
+      signed_up: 'Sesión iniciada correctamente. ¡Bienvenido!'
+      signed_up_but_unconfirmed: 'Un correo con el enlace de confirmación de su cuenta ha sido enviado a tu correo electrónico. Por favor sigue las instrucciones para activar tu cuenta.'
+      signed_up_but_inactive: 'Te has registrado satisfactoriamente. Sin embargo, no es posible iniciar sesión debido a que tu cuenta aún no ha sido activada.'
+      signed_up_but_locked: 'Te has registrado satisfactoriamente. Sin embargo, no es posible iniciar sesión debido a que tu cuenta se encuentra bloqueada.'
+      updated: 'Datos actualizados exitosamente.'
+      update_needs_confirmation: 'Datos actualizados exitosamente. Por favor, verifica tu inbox y da click en el enlace de confirmación para finalizar el proceso.'
+      destroyed: 'Adiós! Tu cuenta fue cancelada satisfactoriamente. Esperamos verte pronto.'
+      email: 'Correo Electrónico' 
+      unconfirmed_email: 'Esperando confirmación del correo electrónico: '
     unlocks:
-      send_instructions: 'En unos minutos usted recibirá un correo electrónico con instrucciones sobre cómo desbloquear su cuenta.'
-      unlocked: 'Su cuenta ha sido desbloqueada con éxito. Por favor inicie sesión para continuar.'
-      send_paranoid_instructions: 'Si su cuenta existe, en unos minutos usted recibirá un correo electrónico con instrucciones sobre cómo desbloquear su cuenta.'
-      email: "Correo Electrónico" 
+      send_instructions: 'En unos minutos recibirás un correo electrónico con instrucciones sobre cómo desbloquear tu cuenta.'
+      unlocked: 'Tu cuenta ha sido desbloqueada con éxito. Por favor inicia sesión para continuar.'
+      send_paranoid_instructions: 'Si ya te habías registrado con nosotros, en unos minutos recibirás un correo con instrucciones para reestablecer tu contraseña.'
+      email: 'Correo Electrónico' 
     omniauth_callbacks:
       success: 'Exitosamente autorizado desde la cuenta %{kind}.'
-      failure: 'No fue posible autorizarlo desde %{kind} debido a "%{reason}".'
+      failure: "No fue posible autorizarlo desde %{kind} debido a '%{reason}'.'"
     mailer:
+      welcome: 
+        title: 'Bienvenido'
       confirmation_instructions:
-        subject: 'Instrucciones de confirmación'
+        subject: 'Instrucciones de Confirmación'
       reset_password_instructions:
-        subject: 'Instrucciones de reestablecimiento de contraseña'
+        subject: 'Instrucciones de reinicio de contraseña'
       unlock_instructions:
         subject: 'Instrucciones de desbloqueo'

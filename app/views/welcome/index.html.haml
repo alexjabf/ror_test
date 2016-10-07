@@ -1,1 +1,33 @@
-= render is_admin? ? "/welcome/admin" : "/welcome/default"
+/ Projects Row
+.row
+  .col-lg-12
+    %h1.page-header
+      - if signed_in?
+        Bienvenido.
+        %small= current_user.full_name
+      - else
+        Esta es una pagina de prueba.
+        %small Puedes utilizar correos verdaderos para registrarte y se te mande el link de confirmació de cuenta.
+    %ol.breadcrumb
+      %li
+        %a{:href => "/"} Inicio
+      %li.active Prueba
+
+%hr/
+/ Pagination
+.row.text-center
+  .col-lg-12
+    - if signed_in?
+      = link_to "IR A MI CUENTA", current_user, class: 'btn btn-primary'
+    - else
+      = link_to "REGISTRATE", new_user_registration_path, class: 'btn btn-primary'
+
+%hr/
+/ Call to Action Section
+.well
+  .row
+    .col-md-8
+      %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.
+    .col-md-4
+      %a.btn.btn-lg.btn-default.btn-block{:href => "http://www.google.com"} Buscar en Google
+%hr/

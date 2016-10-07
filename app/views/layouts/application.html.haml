@@ -48,9 +48,14 @@
           %ul.nav.navbar-nav.navbar-right
             - if signed_in?
               %li
-                =link_to 'Mi Cuenta', current_user
+                = link_to 'Mi Cuenta', current_user
+              - if can? :edit, User 
+                %li
+                  = link_to 'Editar mi cuenta', edit_user_registration_path
               %li
-                =link_to 'Salir', destroy_user_session_path, method: :delete
+                = link_to 'Mis contactos', user_contacts_path
+              %li
+                = link_to 'Salir', destroy_user_session_path, method: :delete
             - else    
               %li.dropdown
                 %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
@@ -92,25 +97,22 @@
         .row
           .col-lg-12
             %h1.page-header
-              Proximos Eventos
-              %small Compra tus boletos antes de que se agoten
-            %ol.breadcrumb
-              %li
-                %a{:href => "/"} Inicio
-              %li.active Eventos mas populares
+              Menu de Administracion
+              %small Este menu esta solo disponible para adminisradores.
+        %br
         .row
           / Sidebar Column
-          .col-md-3
+          .col-md-12
             .list-group
               %a.list-group-item{:href => "/roles"} Roles
               %a.list-group-item{:href => "/users"} Usuarios
-          = yield
-          =render 'partials/admin/pagination' if show_pagination?
-          %hr
-          =render 'partials/admin/action_links' unless controller_name == 'welcome'
-      - else
-        = yield
-        =render 'partials/admin/pagination' if show_pagination?
+              %a.list-group-item{:href => "/user_contacts?show_all_contacts=true"} Todos los Contactos
+              %a.list-group-item{:href => "/user_contacts"} Solo mis Contactos
+      = yield
+      =render 'partials/admin/pagination' if show_pagination?
+      %hr
+      =render 'partials/admin/action_links' unless controller_name == 'welcome'
+      %br
       / Footer
       %footer
         .row

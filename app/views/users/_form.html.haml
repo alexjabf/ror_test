@@ -1,4 +1,14 @@
-.panel.panel-primary.col-lg-9
+/ Projects Row
+.row
+  .col-lg-12
+    %h1.page-header
+      Crear/Editar Usuario
+      %small= @user.full_name
+    %ol.breadcrumb
+      %li
+        %a{:href => "/"} Inicio
+      %li.active Usuarios.
+.panel.panel-primary.col-lg-12
   = form_for(@user, html: {multipart: true}) do |f|
     - if @user.errors.any?
       #error_explanation
@@ -9,21 +19,35 @@
 
     .field
       = f.label :first_name
-      = f.text_field :first_name
+      = f.text_field :first_name, class: 'form-control', required: true
     .field
       = f.label :last_name
-      = f.text_field :last_name
+      = f.text_field :last_name, class: 'form-control', required: true
     .field
       = f.label :username
-      = f.text_field :username
+      = f.text_field :username, class: 'form-control', required: true
     .field
       = f.label :email
-      = f.text_field :email
-    .field
-      = f.label :avatar
-      = f.text_field :avatar
+      = f.text_field :email, class: 'form-control', required: true
     .field
       = f.label :active
       = f.check_box :active
+    - if action_name == 'new' or action_name == 'create'
+      .field
+        = f.label :password
+        - if @minimum_password_length
+          %em
+            (#{@minimum_password_length} caracteres minimos.)
+        %br/
+        = f.password_field :password, autocomplete: "off", class: 'form-control', required: true
+      .field
+        = f.label :password_confirmation
+        %br/
+        = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', required: true
+    .field
+      = f.label :avatar
+      = f.file_field :avatar
+      = f.hidden_field :avatar_cache
+      %br
     .actions
-      = f.submit 'Guardar', class: 'btn btn-default'
+      = f.submit 'Aceptar', class: 'btn btn-primary'

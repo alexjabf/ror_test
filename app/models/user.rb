@@ -1,6 +1,7 @@
 class User < ApplicationRecord  
   mount_uploader :avatar, AvatarUploader   
   belongs_to :role
+  has_many :user_contacts, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :lockable, :timeoutable,
@@ -8,7 +9,7 @@ class User < ApplicationRecord
     :timeoutable, :omniauthable, omniauth_providers: [:facebook]
   attr_accessor :login, :fullname
   
-  validates :first_name, :last_name, :email, :username, :password, :active, :role_id, presence: true
+  validates :first_name, :last_name, :email, :username, :role_id, presence: true
   validates :first_name, format: { with: NAMES, multiline: true }, length: { within: 1..30 }
   validates :last_name, format: { with: NAMES, multiline: true }, length: { within: 1..30 }
   validates :active, format: { with: BOOLEAN, multiline: true }, length: { within: 1..5 }
@@ -21,7 +22,8 @@ class User < ApplicationRecord
     length: { within: 6..20 }
   validates :password, 
     format: { with: PASSWORD, multiline: true },
-    length: { within: 8..20 }
+    length: { within: 8..20 },
+    on: :create
   validates :active, 
     format: { with: BOOLEAN, multiline: true }, 
     length: { within: 1..5 }

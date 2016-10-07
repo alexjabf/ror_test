@@ -1,0 +1,31 @@
+es:
+  user_contacts:   
+    show:
+      id: 'Id: '      
+      name: 'Nombre: '
+      email: 'E-mail'
+      phone: 'Telefono'
+      address: 'Dirección'
+      created_at: 'Registrado el: '
+      updated_at: 'Actualizado el: '
+    index:
+      id: 'Id ' 
+      name: 'Nombre: '
+      email: 'E-mail'
+      phone: 'Telefono'
+      address: 'Dirección'   
+      created_at: 'Registrado el'
+      updated_at: 'Actualizado el'      
+  activerecord:
+    models:
+      user_contact: 'Contacto'
+      user_contacts: 'Contactos' 
+    attributes:
+      user_contact:
+        id: 'Id: '      
+        name: 'Nombre: '
+        email: 'E-mail'
+        phone: 'Telefono'
+        address: 'Dirección'
+        created_at: 'Registrado el: '
+        updated_at: 'Actualizado el: '

@@ -1,4 +1,4 @@
-.panel.panel-primary.col-lg-9
+.panel.panel-primary.col-lg-12
   =render 'partials/admin/records_per_page'
   %table.table
     %thead
@@ -17,7 +17,7 @@
         - @model = user
         %tr
           %td= custom_link(controller_name, 'show', user.id, 'btn btn-xs btn-primary')
-          %td= image_tag(user.avatar)
+          %td= image_tag(user.avatar, width: '100px')
           %td= user.full_name
           %td= user.username
           %td= user.email

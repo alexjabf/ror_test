@@ -1,4 +1,14 @@
-.panel.panel-primary.col-lg-9
+/ Projects Row
+.row
+  .col-lg-12
+    %h1.page-header
+      Roles
+      %small Aquí puedes ver y editar tus roles o dar de baja alguno.
+    %ol.breadcrumb
+      %li
+        %a{:href => "/"} Inicio
+      %li.active= link_to 'Crear Contacto', new_role_path, title: 'Crea un nuevo contacto.'
+.panel.panel-primary.col-lg-12
   =render 'partials/admin/records_per_page'
   %table.table
     %thead

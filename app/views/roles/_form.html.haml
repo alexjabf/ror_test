@@ -1,4 +1,14 @@
-.panel.panel-primary.col-lg-9
+/ Projects Row
+.row
+  .col-lg-12
+    %h1.page-header
+      Crear/Editar Rol
+      %small= @role.name
+    %ol.breadcrumb
+      %li
+        %a{:href => "/"} Inicio
+      %li.active Roles
+.panel.panel-primary.col-lg-12
   = form_for @role do |f|
     - if @role.errors.any?
       #error_explanation
@@ -9,7 +19,7 @@
 
     .field
       = f.label :name
-      = f.text_field :name
+      = f.text_field :name, class: 'form-control', required: true
     .field
       = f.label :superadmin
       = f.check_box :superadmin
@@ -21,9 +31,10 @@
       = f.check_box :custom
     .field
       = f.label :description
-      = f.text_area :description
+      = f.text_area :description, class: 'form-control', required: true
     .field
       = f.label :code
-      = f.text_field :code
+      = f.text_field :code, class: 'form-control', required: true
+      %br
     .actions
-      = f.submit 'Guardar', class: 'btn btn-default'
+      = f.submit 'Aceptar', class: 'btn btn-primary'

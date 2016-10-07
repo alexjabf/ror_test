@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :user_contacts
   resources :payment_types do
     collection do
       delete 'destroy_multiple'

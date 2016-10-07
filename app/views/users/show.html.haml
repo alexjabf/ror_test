@@ -7,7 +7,7 @@
     %ol.breadcrumb
       %li
         %a{:href => "/"} Inicio
-      %li.active Prueba
+      %li.active Usuarios
 .panel.panel-primary.col-lg-12
   %p
     %b Nombre:
@@ -29,8 +29,8 @@
     = t(@user.active.to_s)
   %p
     %b Avatar:
-    = image_tag(@user.avatar)
-  - if can? :destroy, User  
+    = image_tag(@user.avatar, width: '300px')
+  - if can? :edit, User  
     %p
       = link_to 'Editar mi cuenta', edit_user_registration_path, class: 'btn btn-primary'
   - if can? :destroy, User  

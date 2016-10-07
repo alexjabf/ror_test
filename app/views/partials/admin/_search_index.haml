@@ -1,7 +1,0 @@
-= form_tag eval("#{controller_name}_path"), :method => "get" do
-  = text_field_tag :search, params[:search], :maxlength => 50, :style => "margin-top:10px;"
-  = select_tag(:column, options_for_select(eval("#{to_model(controller_name)}.columns.map {|c| c.name }"), params[:column]), {:prompt => false})
-  = select_tag(:search_type, options_for_select([["Contenga", "LIKE"], ["Excato", "="]], params[:search_type]), {:prompt => false})
-  = select_tag(:sort_by, options_for_select([[t("partials.search_options.desc"), "DESC"], [t("partials.search_options.asc"), "ASC"]], params[:sort_by]), {:prompt => false})
-  = select_tag(:per_page, options_for_select([10,20,30,40,50,60,70,80,90,100, [t('partials.search_options.all_records'), eval("@#{controller_name}.count")]], params[:per_page].to_i), {:prompt => false})
-  = button_tag t("Aceptar"), :class => 'btn btn-sm btn-primary', :id => "quick-search-button"

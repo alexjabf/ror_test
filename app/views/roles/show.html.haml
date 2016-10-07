@@ -1,19 +1,29 @@
-.panel.panel-primary.col-lg-9
+/ Projects Row
+.row
+  .col-lg-12
+    %h1.page-header
+      Detalles del Rol
+      %small Aquí puedes ver y editar tu rol o dar de baja alguno.
+    %ol.breadcrumb
+      %li
+        %a{:href => "/"} Inicio
+      %li.active Contactos
+.panel.panel-primary.col-lg-12
   %p 
-    %b Name:
+    %b Nombre:
     = @role.name
   %p
     %b Superadmin:
     = t(@role.superadmin.to_s)
   %p
-    %b Default user:
+    %b Default:
     = t(@role.default_user.to_s)
   %p
-    %b Custom:
+    %b Personalizado:
     = t(@role.custom.to_s)
   %p
-    %b Description:
+    %b Descripción:
     = @role.description
   %p
-    %b Code:
+    %b Código:
     = @role.code

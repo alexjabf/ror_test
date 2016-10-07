@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   def get_user_status
     if signed_in? and !current_user.active
       sign_out(current_user)
-      redirect_to publications_path, alert: 'Tu cuenta ha sido desactivada porfavor contactanos para reactivar tu cuenta.'
+      redirect_to root_path, alert: 'Tu cuenta ha sido desactivada porfavor contactanos para reactivar tu cuenta.'
     end
   end
   

@@ -1,0 +1,35 @@
+/ Projects Row
+.row
+  .col-lg-12
+    %h1.page-header
+      Crear/Editar Contacto
+      %small= @user_contact.name
+    %ol.breadcrumb
+      %li
+        %a{:href => "/"} Inicio
+      %li.active Contactos
+.panel.panel-primary.col-lg-12
+  = form_for @user_contact do |f|
+    - if @user_contact.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@user_contact.errors.count, "error")} evitaron que este record fuera guardado:"
+        %ul
+          - @user_contact.errors.full_messages.each do |msg|
+            %li= msg
+
+      = f.hidden_field :user_id, value: current_user.id
+    .field
+      = f.label :name
+      = f.text_field :name, class: 'form-control', required: true
+    .field
+      = f.label :email
+      = f.text_field :email, class: 'form-control', required: true
+    .field
+      = f.label :phone
+      = f.text_field :phone, class: 'form-control', required: true
+    .field
+      = f.label :address
+      = f.text_field :address, class: 'form-control', required: true
+      %br
+    .actions
+      = f.submit "Aceptar", class: 'btn btn-primary'
