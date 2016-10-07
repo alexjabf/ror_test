@@ -3,6 +3,7 @@ class UserContactsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource except: [:create]
   respond_to :html
+  respond_to :json
   
   def index
     if is_admin? and params[:show_all_contacts]

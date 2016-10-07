@@ -3,6 +3,7 @@ class RolesController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource except: [:create]
   respond_to :html
+  respond_to :json
   
   def index
     @roles = Role.order('id ASC')

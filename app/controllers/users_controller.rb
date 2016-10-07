@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource except: [:create]
   respond_to :html
+  respond_to :json
   
   def index
     @users = User.order('id ASC')
