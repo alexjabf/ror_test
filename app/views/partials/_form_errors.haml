@@ -1,7 +1,0 @@
-- @model = get_model
-- if @model.errors.any?
-  .alert.alert-danger.alert-dismissable
-    %button.close{'aria-hidden':'true', 'data-dismiss':'alert', type:'button'} ×
-    %ul.errors_list
-      - @model.errors.full_messages.each do |msg|
-        %li= msg
