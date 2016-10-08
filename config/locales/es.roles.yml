@@ -3,11 +3,7 @@ es:
     role_types:
         not_role: 'Sin Rol'
         superadmin: 'Super Administrador'
-        administrator: 'Administrador'
-        driver: 'Conductor: '
         default_user: 'Usuario: '        
-        default_user: 'Usuario'
-        guess: 'Invitado' 
         custom: 'Personalizado'    
     show:
       id: 'Id: '      

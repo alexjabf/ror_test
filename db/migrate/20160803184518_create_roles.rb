@@ -12,5 +12,3 @@ class CreateRoles < ActiveRecord::Migration[5.0]
     end
   end
 end
-
-#rails g scaffold role name:string protected:boolean superadmin:boolean administrator:boolean default_user:boolean guess:boolean custom:boolean description:text code:string

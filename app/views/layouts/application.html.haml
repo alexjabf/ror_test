@@ -5,7 +5,7 @@
     %meta{:charset => "utf-8"}
     %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
-    %meta{:content => "Prueba de Desarrollo de Boletia", :name => "description"}
+    %meta{:content => "Prueba de Desarrollo", :name => "description"}
     %meta{:content => "Alejandro Ballesteros", :name => "author"}
     %title Prueba
     = csrf_meta_tags
@@ -82,11 +82,11 @@
         / Wrapper for slides
         .carousel-inner
           .item.active
-            = image_tag('/assets/metallica2.jpg', width:'1900')
+            = image_tag('/assets/banner1.jpg', width:'1900')
           .item
-            = image_tag('/assets/guns.jpg', width:'1900px')
+            = image_tag('/assets/banner2.jpg', width:'1900px')
           .item
-            = image_tag('/assets/mm.jpg', width:'1900px')
+            = image_tag('/assets/banner3.jpg', width:'1900px')
         / Controls
         %a.left.carousel-control{"data-slide" => "prev", :href => "#myCarousel"}
           %span.icon-prev

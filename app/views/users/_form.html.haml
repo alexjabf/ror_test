@@ -34,7 +34,7 @@
       = f.check_box :active
     .field
       = f.label :rol
-      = f.collection_select(:role_id, Roll.all, :id, :select_display, {:include_blank => false, :prompt => true} ,{:required => true,  :placeholder => 'Selecciona un rol', :title => Selecciona un rol})
+      = f.collection_select(:role_id, Role.all, :id, :name, {prompt: true}, {required: true,  placeholder: 'Selecciona un rol', title: "Selecciona un rol", class: 'form-control'})
     - if action_name == 'new' or action_name == 'create'
       .field
         = f.label :password
